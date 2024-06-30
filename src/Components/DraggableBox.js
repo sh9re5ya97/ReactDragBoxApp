@@ -1,11 +1,11 @@
 // src/components/DraggableBox.js
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect  } from 'react';
 
-const DraggableBox = ({ title, children }) => {
+const DraggableBox = ({ title, children, initialPosition,containerRef  }) => {
   const boxRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState(initialPosition);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   const handleMouseDown = (e) => {
@@ -32,8 +32,8 @@ const DraggableBox = ({ title, children }) => {
     <div
       ref={boxRef}
       style={{
-        width: '100%',
-        height: '100%',
+        width: '80%',
+        height: '80%',
         backgroundColor: 'rgba(0, 0, 255, 0.1)',
         position: 'absolute',
         left: `${position.x}px`,
