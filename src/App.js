@@ -1,38 +1,38 @@
 // src/App.js
 
-import React, { useState,useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import DraggableBox from './Components/DraggableBox';
 
 const App = () => {
   const [layers, setLayers] = useState(1);
-
-  const appContainerRef = useRef(null);
-  const containerRefs = useRef([appContainerRef]);
+  const containerRefs = useRef([React.createRef()]); // Initialize with the first container ref
 
   const addParent = () => {
     setLayers(layers + 1);
-    containerRefs.current.push(React.createRef())
+    containerRefs.current.push(React.createRef()); // Add a new ref for each new layer
   };
 
   const renderNestedBoxes = (layer) => {
-    if (layer>0) {
-    
-    return (
-      <DraggableBox  
-        key={layer}
-        title={`Layer ${layer}`}
-        initialPosition={{ x: 50, y: 50 }}
-        containerRef={containerRefs.current[layer]}>
-          {renderNestedBoxes(layer - 1)}
-      </DraggableBox>
-    );
-  }
+    if (layer > 0) {
+      return (
+        <DraggableBox
+          key={layer}
+          title={`Layer ${layer}`}
+          containerRef={containerRefs.current[layer - 1]}
+        >
+          
+            {renderNestedBoxes(layer - 1)}
+        </DraggableBox>
+      );
+    }
+    return null;
   };
 
   return (
     <div>
       <button onClick={addParent}>Add Parent</button>
       <div
+        ref={containerRefs.current[0]}
         style={{
           width: '100%',
           height: '100vh',
