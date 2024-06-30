@@ -1,5 +1,3 @@
-// src/components/DraggableBox.js
-
 import React from 'react';
 import Draggable from 'react-draggable';
 

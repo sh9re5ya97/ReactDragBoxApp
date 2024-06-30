@@ -1,5 +1,3 @@
-// src/App.js
-
 import React, { useState, useRef } from 'react';
 import DraggableBox from './Components/DraggableBox';
 
