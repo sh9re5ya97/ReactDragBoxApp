@@ -2,9 +2,7 @@
 
 This is a simple React application that demonstrates nested draggable boxes. You can add new parent boxes, and each box can be dragged inside the parent box.
 
-<video width="600" controls>
-  <source src="./public/draggableNestedBoxes.mp4" type="video/mp4">
-</video>
+![Demo](./public/demo.gif)
 
 ## Features
 
