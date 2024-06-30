@@ -1,42 +1,23 @@
-import React, { useState, useRef } from 'react';
+// src/App.js
+
+import React, { useState } from 'react';
 import DraggableBox from './Components/DraggableBox';
 
 const App = () => {
   const [layers, setLayers] = useState(1);
-  const draggableRefs = useRef([]);
 
   const addParent = () => {
     setLayers(layers + 1);
   };
 
   const renderNestedBoxes = (layer) => {
-    if (layer === 0) {
-      return (
-        <div
-          style={{
-            width: 100+layer*10+'px',
-            height: 100+layer*10+'px',
-            backgroundColor: 'blue',
-            position: 'relative',
-            cursor: 'grab',
-          }}
-        />
-      );
-    }
+    if (layer>0) {
     return (
-      <DraggableBox ref={(el) => (draggableRefs.current[layer] = el)}>
-        <div
-          style={{
-            width:  100+layer*10+'px',
-            height:  100+layer*10+'px',
-            position: 'relative',
-            border: '1px solid black',
-          }}
-        >
+      <DraggableBox title={`Layer ${layer}`}>
           {renderNestedBoxes(layer - 1)}
-        </div>
       </DraggableBox>
     );
+  }
   };
 
   return (
